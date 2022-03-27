@@ -34,12 +34,12 @@ export default [
     {
         name: 'bakedTexture',
         type: 'texture',
-        path: 'baked.jpg'
+        path: 'textures/bakedPortalModel/baked.jpg'
     },
     {
         name: 'portalModel',
         type: 'gltfDracoModel',
-        path: 'portal.glb'
+        path: 'models/Portal/portal.glb'
     }
     // PortalWorld - end
 ]
