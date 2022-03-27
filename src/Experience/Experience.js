@@ -5,12 +5,13 @@ import Sizes from './Utils/Sizes.js'
 import Time from './Utils/Time.js'
 import Camera from './Camera.js'
 import Renderer from './Renderer.js'
-import World from './World/World.js'
+import FoxWorld from './FoxWorld/FoxWorld.js'
 import Resources from './Utils/Resources.js'
 import CubeWorld from './CubeWorld/CubeWorld.js'
 
 import sources from './sources.js'
 import WorldSelector from './WorldSelector.js'
+import PortalWorld from './PortalWorld/PortalWorld.js'
 
 let instance = null
 
@@ -53,15 +54,18 @@ export default class Experience {
         this.worldSelector = new WorldSelector()
         this.world = null
         if (this.worldSelector.selected === "CubeWorld") this.world = new CubeWorld()
-        else if (this.worldSelector.selected === "FoxWorld") this.world = new World()
+        else if (this.worldSelector.selected === "FoxWorld") this.world = new FoxWorld()
+        else if (this.worldSelector.selected === "PortalWorld") this.world = new PortalWorld()
         else this.world = new CubeWorld()
 
         // WorldSelector on change
         this.worldSelector.on('worldChange', () => {
             this.destroyScene()
+            // TODO Ressourcen werden mehrmals geladen, sollte nicht sein?
             this.resources = new Resources(sources)
             if (this.worldSelector.selected === "CubeWorld") this.world = new CubeWorld()
-            else if (this.worldSelector.selected === "FoxWorld") this.world = new World()
+            else if (this.worldSelector.selected === "FoxWorld") this.world = new FoxWorld()
+            else if (this.worldSelector.selected === "PortalWorld") this.world = new PortalWorld()
             else this.world = new CubeWorld()
         })
 

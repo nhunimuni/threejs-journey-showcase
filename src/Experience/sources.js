@@ -1,16 +1,17 @@
 export default [
+    // FoxWorld - start
     {
         name: 'environmentMapTexture',
         type: 'cubeTexture',
         path:
-        [
-            'textures/environmentMap/px.jpg',
-            'textures/environmentMap/nx.jpg',
-            'textures/environmentMap/py.jpg',
-            'textures/environmentMap/ny.jpg',
-            'textures/environmentMap/pz.jpg',
-            'textures/environmentMap/nz.jpg'
-        ]
+            [
+                'textures/environmentMap/px.jpg',
+                'textures/environmentMap/nx.jpg',
+                'textures/environmentMap/py.jpg',
+                'textures/environmentMap/ny.jpg',
+                'textures/environmentMap/pz.jpg',
+                'textures/environmentMap/nz.jpg'
+            ]
     },
     {
         name: 'grassColorTexture',
@@ -26,5 +27,19 @@ export default [
         name: 'foxModel',
         type: 'gltfModel',
         path: 'models/Fox/glTF/Fox.gltf'
+    },
+    // FoxWorld - end
+
+    // PortalWorld - start
+    {
+        name: 'bakedTexture',
+        type: 'texture',
+        path: 'baked.jpg'
+    },
+    {
+        name: 'portalModel',
+        type: 'gltfDracoModel',
+        path: 'portal.glb'
     }
+    // PortalWorld - end
 ]

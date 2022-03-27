@@ -5,7 +5,7 @@ export default class WorldSelector extends EventEmitter {
         super()
 
         // Setup
-        this.default = "CubeWorld"
+        this.default = "PortalWorld"
         this.dropdown = document.getElementById("experience")
         this.selected = this.default
         this.dropdown.value = this.default
