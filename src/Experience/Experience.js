@@ -12,6 +12,7 @@ import CubeWorld from './CubeWorld/CubeWorld.js'
 import sources from './sources.js'
 import WorldSelector from './WorldSelector.js'
 import PortalWorld from './PortalWorld/PortalWorld.js'
+import GalaxyWorld from './Galaxy World/GalaxyWorld.js'
 
 let instance = null
 let worldDestructionDone = false
@@ -54,6 +55,7 @@ export default class Experience {
         this.worldSelector = new WorldSelector()
         this.world = null
         if (this.worldSelector.selected === "CubeWorld") this.world = new CubeWorld()
+        else if (this.worldSelector.selected === "GalaxyWorld") this.world = new GalaxyWorld()
         else if (this.worldSelector.selected === "FoxWorld") this.world = new FoxWorld()
         else if (this.worldSelector.selected === "PortalWorld") this.world = new PortalWorld()
         else this.world = new CubeWorld()
@@ -64,6 +66,7 @@ export default class Experience {
             if (worldDestructionDone) {
                 this.resources = new Resources(sources)
                 if (this.worldSelector.selected === "CubeWorld") this.world = new CubeWorld()
+                else if (this.worldSelector.selected === "GalaxyWorld") this.world = new GalaxyWorld()
                 else if (this.worldSelector.selected === "FoxWorld") this.world = new FoxWorld()
                 else if (this.worldSelector.selected === "PortalWorld") this.world = new PortalWorld()
                 else this.world = new CubeWorld()
