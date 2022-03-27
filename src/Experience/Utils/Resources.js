@@ -85,4 +85,39 @@ export default class Resources extends EventEmitter {
             this.trigger('ready')
         }
     }
+
+    disposeResources() {
+        for (const [key, value] of Object.entries(this.items)) {
+            if (value instanceof THREE.Texture) {
+                value.dispose()
+            } else if (value.hasOwnProperty('scene')) {
+                let objectToRemove = []
+                value.scene.traverse((child) => {
+                    // Test if it's a mesh
+                    if (child instanceof THREE.Mesh) {
+                        child.geometry.dispose()
+
+                        // Loop through the material properties
+                        for (const key in child.material) {
+                            const value = child.material[key]
+
+                            // Test if there is a dispose function
+                            if (value && typeof value.dispose === 'function') {
+                                value.dispose()
+                            }
+                        }
+                    }
+                    if (child instanceof THREE.Mesh || child instanceof THREE.Group) {
+                        objectToRemove.push(child)
+                    }
+                })
+                objectToRemove.forEach((obj) => {
+                    value.scene.remove(obj)
+                })
+            }
+        }
+        for (const prop of Object.getOwnPropertyNames(this.items)) {
+            delete this.items[prop];
+        }
+    }
 }

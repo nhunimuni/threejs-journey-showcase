@@ -14,6 +14,7 @@ import WorldSelector from './WorldSelector.js'
 import PortalWorld from './PortalWorld/PortalWorld.js'
 
 let instance = null
+let worldDestructionDone = false
 
 /**
  * Experience is the main class of the application.
@@ -45,7 +46,6 @@ export default class Experience {
         this.sizes = new Sizes()
         this.time = new Time()
         this.scene = new THREE.Scene()
-        // TODO Resources and Camera soll auch dynamisch wechselbar sein
         this.resources = new Resources(sources)
         this.camera = new Camera()
         this.renderer = new Renderer()
@@ -61,12 +61,13 @@ export default class Experience {
         // WorldSelector on change
         this.worldSelector.on('worldChange', () => {
             this.destroyScene()
-            // TODO Ressourcen werden mehrmals geladen, sollte nicht sein?
-            this.resources = new Resources(sources)
-            if (this.worldSelector.selected === "CubeWorld") this.world = new CubeWorld()
-            else if (this.worldSelector.selected === "FoxWorld") this.world = new FoxWorld()
-            else if (this.worldSelector.selected === "PortalWorld") this.world = new PortalWorld()
-            else this.world = new CubeWorld()
+            if (worldDestructionDone) {
+                this.resources = new Resources(sources)
+                if (this.worldSelector.selected === "CubeWorld") this.world = new CubeWorld()
+                else if (this.worldSelector.selected === "FoxWorld") this.world = new FoxWorld()
+                else if (this.worldSelector.selected === "PortalWorld") this.world = new PortalWorld()
+                else this.world = new CubeWorld()
+            }
         })
 
         // Sizes resize event
@@ -109,15 +110,21 @@ export default class Experience {
                     }
                 }
             }
-            if (child instanceof THREE.Mesh || child instanceof THREE.Group) {
+            if (child instanceof THREE.Mesh || child instanceof THREE.Group || child instanceof THREE.Points) {
                 objectToRemove.push(child)
             }
         })
         objectToRemove.forEach((obj) => this.scene.remove(obj))
 
-        // TODO Debug UI resetten wenn die Welt gewechselt wird
-        // console.log(this.debug.ui.children);
-        // if (this.debug.active) this.debug.ui.children.forEach(controller => controller.destroy())
+        // Dispose ressources
+        this.resources.disposeResources()
+
+        // Reset lil-gui
+        if (this.debug.active) {
+            this.debug.ui.destroy()
+            this.debug = new Debug()
+        }
+        worldDestructionDone = true
     }
 
     destroyAll() {

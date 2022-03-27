@@ -7,12 +7,15 @@ export default class CubeWorld {
     constructor() {
         this.experience = new Experience()
         this.scene = this.experience.scene
+        this.renderer = this.experience.renderer
         this.resources = this.experience.resources
         this.time = this.experience.time
         this.debug = this.experience.debug
 
         // Wait for resources
         this.resources.on('ready', () => {
+            this.renderer.instance.setClearColor('#000000')
+
             // Setup
             this.geometry = new THREE.BoxGeometry(1, 1, 1);
             this.material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });

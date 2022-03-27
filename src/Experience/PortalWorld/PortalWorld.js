@@ -16,14 +16,13 @@ export default class PortalWorld {
         this.debug = this.experience.debug
 
         this.debugObject = {}
-        this.debugObject.clearColor = '#201919'
+        this.debugObject.clearColor = '#190321'
         this.debugObject.portalColorStart = '#ffffff'
-        this.debugObject.portalColorEnd = '#000000'
-
-
+        this.debugObject.portalColorEnd = '#380849'
 
         // Wait for resources
         this.resources.on('ready', () => {
+            this.renderer.instance.setClearColor(this.debugObject.clearColor)
             /**
              * Textures
              */
@@ -61,7 +60,6 @@ export default class PortalWorld {
             * Model
             */
             this.portalModel = this.resources.items.portalModel
-            // console.log(this.portalModel.scene.children)
 
             // this.portalModel.scene.traverse((child) => {
             //     child.material = bakedMaterial

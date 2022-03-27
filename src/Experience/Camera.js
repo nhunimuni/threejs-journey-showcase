@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import Experience from './Experience.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
+// TODO Camera soll auch dynamisch wechselbar sein
 export default class Camera {
     constructor() {
         this.experience = new Experience()
