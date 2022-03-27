@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 
 import Debug from './Utils/Debug.js'
+import Stats from './Utils/Stats.js'
 import Sizes from './Utils/Sizes.js'
 import Time from './Utils/Time.js'
 import Camera from './Camera.js'
@@ -44,6 +45,7 @@ export default class Experience {
 
         // Setup
         this.debug = new Debug()
+        this.stats = new Stats()
         this.sizes = new Sizes()
         this.time = new Time()
         this.scene = new THREE.Scene()
@@ -90,9 +92,17 @@ export default class Experience {
     }
 
     update() {
-        this.camera.update()
-        this.world.update()
-        this.renderer.update()
+        if (this.stats.active) {
+            this.stats.instance.begin()
+            this.camera.update()
+            this.world.update()
+            this.renderer.update()
+            this.stats.instance.end()
+        } else {
+            this.camera.update()
+            this.world.update()
+            this.renderer.update()
+        }
     }
 
     destroyScene() {
