@@ -15,6 +15,7 @@ import WorldSelector from './WorldSelector.js'
 import PortalWorld from './PortalWorld/PortalWorld.js'
 import GalaxyWorld from './Galaxy World/GalaxyWorld.js'
 import RagingSeaWorld from './RagingSeaWorld/RagingSeaWorld.js'
+import AnimatedGalaxyWorld from './AnimatedGalaxyWorld/AnimatedGalaxyWorld.js'
 
 let instance = null
 let worldDestructionDone = false
@@ -60,6 +61,7 @@ export default class Experience {
         if (this.worldSelector.selected === "CubeWorld") this.world = new CubeWorld()
         else if (this.worldSelector.selected === "GalaxyWorld") this.world = new GalaxyWorld()
         else if (this.worldSelector.selected === "RagingSeaWorld") this.world = new RagingSeaWorld()
+        else if (this.worldSelector.selected === "AnimatedGalaxyWorld") this.world = new AnimatedGalaxyWorld()
         else if (this.worldSelector.selected === "FoxWorld") this.world = new FoxWorld()
         else if (this.worldSelector.selected === "PortalWorld") this.world = new PortalWorld()
         else this.world = new CubeWorld()
@@ -72,6 +74,7 @@ export default class Experience {
                 if (this.worldSelector.selected === "CubeWorld") this.world = new CubeWorld()
                 else if (this.worldSelector.selected === "GalaxyWorld") this.world = new GalaxyWorld()
                 else if (this.worldSelector.selected === "RagingSeaWorld") this.world = new RagingSeaWorld()
+                else if (this.worldSelector.selected === "AnimatedGalaxyWorld") this.world = new AnimatedGalaxyWorld()
                 else if (this.worldSelector.selected === "FoxWorld") this.world = new FoxWorld()
                 else if (this.worldSelector.selected === "PortalWorld") this.world = new PortalWorld()
                 else this.world = new CubeWorld()
